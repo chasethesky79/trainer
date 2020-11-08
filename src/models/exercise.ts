@@ -6,17 +6,13 @@ export interface Exercise {
   nameSound?: string;
   procedure?: string;
   videos?: Array<string>;
-}
-
-export interface ExercisePlan {
-  exercise: Exercise;
   duration: number;
 }
 
 export interface WorkoutPlan {
   name: string;
   title: string;
-  exercises: Array<ExercisePlan>;
+  exercises: Array<Exercise>;
   restBetweenExercise: number;
   description?: string;
 }
