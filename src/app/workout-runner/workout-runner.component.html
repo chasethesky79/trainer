@@ -1,2 +1,17 @@
-<pre>Current Exercise: {{ currentExercise | json }}</pre>
-<pre>Time Left: {{ currentExercise.duration - count }}</pre>
+<div class="row">
+  <div id="exercise-pane" class="col-sm">
+    <h1 class="text-center">{{currentExercise.title}}</h1>
+    <div class="image-container row">
+      IMAGE NAME : {{currentExercise.image}}
+      <img class="img-fluid col-sm" [src]="'/assets/images/' + currentExercise.image"/>
+    </div>
+    <div class="progress time-progress row">
+      <div class="progress-bar col-sm" role="progressbar"
+           [attr.aria-valuenow]="count" aria-valuemin="0"
+           [attr.aria-valuemax]="currentExercise.duration"
+           [ngStyle]="{'width': (count/currentExercise.duration)*100 + '%'}">
+      </div>
+    </div>
+    <h1>Time remaining: {{currentExercise.duration - count}}</h1>
+  </div>
+</div>

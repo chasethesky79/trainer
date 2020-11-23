@@ -11,6 +11,7 @@ export class WorkoutRunnerComponent implements OnInit {
     workout: WorkoutPlan;
     restExercise: Exercise;
     currentExercise: Exercise;
+    currentExerciseIndex = 0;
     count: number;
     constructor(private workoutService: WorkoutService) {}
 
@@ -22,7 +23,7 @@ export class WorkoutRunnerComponent implements OnInit {
 
     start() {
         const workoutTimeRemaining = this.workoutService.getTotalWorkoutDuration(this.workout);
-        this.workout.exercises.forEach((exercise) => this.startExercise(exercise));
+        this.startExercise(this.workout.exercises[this.currentExerciseIndex]);
     }
 
     startExercise(exercise: Exercise) {
@@ -33,6 +34,10 @@ export class WorkoutRunnerComponent implements OnInit {
                 this.count++;
             } else {
                 clearInterval(intervalId);
+                this.currentExerciseIndex++;
+                if (this.currentExerciseIndex < this.workout.exercises.length) {
+                  this.startExercise(this.workout.exercises[this.currentExerciseIndex]);
+                }
             }
         }, 1000);
     }
